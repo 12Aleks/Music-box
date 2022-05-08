@@ -1,7 +1,7 @@
 import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
 import {Album, AlbumDocument} from "./services/album.schema";
-import {Model} from "mongoose";
+import {Model, ObjectId} from "mongoose";
 import {CreateAlbumDto} from "./dto/create-album.dto";
 
 @Injectable()
@@ -13,14 +13,17 @@ export class AlbumService{
     }
 
     async getAll(){
-
+        const albums = await this.albumModel.find();
+        return albums
     }
 
-    async getOne(){
-
+    async getOne(id: ObjectId): Promise<Album>{
+       const album = await this.albumModel.findById(id);
+       return album;
     }
 
-    async delete(){
-
+    async delete(id: ObjectId): Promise<ObjectId>{
+       const album = await this.albumModel.findByIdAndDelete(id);
+       return album._id;
     }
 }
