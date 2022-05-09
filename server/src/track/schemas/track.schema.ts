@@ -26,7 +26,7 @@ export class Track {
     audio: string;
 
     @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]})
-    comments: Comment[]
+    comments: Comment[];
 
     @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Album'})
     album: Album

@@ -26,4 +26,10 @@ export class AlbumService{
        const album = await this.albumModel.findByIdAndDelete(id);
        return album._id;
     }
+
+    async updateOne(id: ObjectId, dto: CreateAlbumDto): Promise<Album>{
+        await this.albumModel.updateOne({_id: id}, {$set: {...dto}});
+        const album = await this.getOne(id);
+        return album;
+    }
 }

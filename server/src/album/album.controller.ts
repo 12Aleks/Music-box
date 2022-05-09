@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Post} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, Post, Put} from "@nestjs/common";
 import {AlbumService} from "./album.service";
 import {CreateAlbumDto} from "./dto/create-album.dto";
 import {ObjectId} from "mongoose";
@@ -24,5 +24,10 @@ export class AlbumController {
     @Delete(':id')
     delete(@Param('id') id: ObjectId) {
         return this.albumService.delete(id)
+    }
+
+    @Put(':id')
+    update(@Param('id') id: ObjectId, dto: CreateAlbumDto){
+        return this.albumService.updateOne(id, dto)
     }
 }
