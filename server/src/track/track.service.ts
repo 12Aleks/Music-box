@@ -5,18 +5,23 @@ import {Model, ObjectId} from "mongoose";
 import {Comment, CommentDocument} from "./schemas/comment.schema";
 import {CreateTrackDto} from "./dto/create-track.dto";
 import {CreateCommentDto} from "./dto/create-comment.dto";
+import {FileService} from "../files/file.service";
 
 
 @Injectable()
 
 export class TrackService{
     constructor(@InjectModel(Track.name) private trackModel: Model<TrackDocument>,
-                @InjectModel(Comment.name) private commentModel: Model<CommentDocument>){}
+                @InjectModel(Comment.name) private commentModel: Model<CommentDocument>,
+                private fileService: FileService
+                ){}
+
     //esli async function dobawlajem Promise<>
-    async create(dto: CreateTrackDto): Promise<Track> {
+    async create( dto: CreateTrackDto, picture, audio): Promise<Track> {
       const track = await this.trackModel.create({
           ...dto,
-          listens: 0,
+          picture: '',
+          audio: ''
       });
         return track;
     }
@@ -27,8 +32,8 @@ export class TrackService{
        return tracks;
     }
 
-    async getOne(id: ObjectId): Promise<Track>{
-        const track = await this.trackModel.findById(id);
+    async getOneTrack(id: ObjectId): Promise<Track>{
+        const track = await this.trackModel.findById(id).populate('comments');
         return track;
     }
 
@@ -39,7 +44,7 @@ export class TrackService{
 
     async updateOne(id: ObjectId, dto: CreateTrackDto): Promise<Track> {
         await this.trackModel.updateOne({_id: id}, {$set: {...dto}});
-        const track = await this.getOne(id);
+        const track = await this.getOneTrack(id);
         return track
     }
 
