@@ -5,7 +5,7 @@ import {Model, ObjectId} from "mongoose";
 import {Comment, CommentDocument} from "./schemas/comment.schema";
 import {CreateTrackDto} from "./dto/create-track.dto";
 import {CreateCommentDto} from "./dto/create-comment.dto";
-import {FileService} from "../files/file.service";
+import {FileService, FileType} from "../files/file.service";
 
 
 @Injectable()
@@ -18,17 +18,22 @@ export class TrackService{
 
     //esli async function dobawlajem Promise<>
     async create( dto: CreateTrackDto, picture, audio): Promise<Track> {
+      const audioPath = await this.fileService.createFile(FileType.AUDIO, audio);
+      const picturePath = await this.fileService.createFile(FileType.IMAGE, picture);
+
       const track = await this.trackModel.create({
           ...dto,
-          picture: '',
-          audio: ''
+          listens: 0,
+          picture: picturePath,
+          audio: audioPath
       });
         return track;
     }
 
 
-    async getAll(){
-       const tracks = await this.trackModel.find();
+    async getAll(count:number = 10, offset: number = 0){
+        //skip() - otstup //limit() - koliczestwo
+       const tracks = await this.trackModel.find().skip(offset).limit(count);
        return tracks;
     }
 
@@ -39,13 +44,13 @@ export class TrackService{
 
     async delete(id: ObjectId): Promise<ObjectId> {
         const track = await this.trackModel.findByIdAndDelete(id);
-        return track._id
+        return track._id;
     }
 
     async updateOne(id: ObjectId, dto: CreateTrackDto): Promise<Track> {
         await this.trackModel.updateOne({_id: id}, {$set: {...dto}});
         const track = await this.getOneTrack(id);
-        return track
+        return track;
     }
 
     async addComment(dto: CreateCommentDto): Promise<Comment>{
@@ -55,5 +60,21 @@ export class TrackService{
         await track.save();
         return comment;
     }
+
+
+    async search(query: string): Promise<Track[]> {
+        const tracks = await this.trackModel.find({
+            name: {$regex: new RegExp(query, 'i')}
+        })
+        return tracks;
+    }
+
+
+    async listen(id: ObjectId){
+       const track = await this.trackModel.findById(id);
+       track.listens += 1;
+       await track.save()
+    }
+
 
 }
