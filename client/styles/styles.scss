@@ -1,3 +1,6 @@
+@import "global";
+@import "navbar";
+
 .center{
   margin-top: 150px;
   display: flex;
@@ -5,7 +8,4 @@
   align-items: center;
   justify-content: center;
 }
-.css-12i7wg6-MuiPaper-root-MuiDrawer-paper{
-  max-width: 240px;
-  width: 100%;
-}
+

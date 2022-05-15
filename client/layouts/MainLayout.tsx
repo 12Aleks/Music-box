@@ -1,15 +1,19 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import Navbar from "../components/Navbar";
+import Container from '@mui/material/Container';
 
-interface Layout{
+interface Layout {
     children: any;
 }
 
-const MainLayout: FC <Layout> = ({children}) => {
+const MainLayout: FC<Layout> = ({children}) => {
+
     return (
         <>
-            <Navbar/>
-            {children}
+            <Navbar />
+            <Container>
+                {children}
+            </Container>
         </>
     );
 };

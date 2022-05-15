@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700&display=swap');
+
+div#__next {
+  margin-top: 80px;
+  h1, h2, h3, h4, h5, h6, p, a, span, div{
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+  }
+}
