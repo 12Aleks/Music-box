@@ -1,0 +1,23 @@
+.tracks_list{
+  justify-content: center;
+  max-width: 900px;
+  width: 100%;
+  padding: 0 15px 10px 15px;
+  h1{
+    margin: 0;
+  }
+  .card{
+
+  }
+}
+.track{
+  margin: 20px auto;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  svg{
+    border-radius: 50%;
+    border: 1px solid $primary;
+    padding: 3px;
+  }
+}

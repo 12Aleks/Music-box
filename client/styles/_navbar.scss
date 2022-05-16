@@ -1,6 +1,6 @@
 .css-ciy9n4-MuiPaper-root-MuiAppBar-root, .css-1t29gy6-MuiToolbar-root{
-  background: rgb(16,0,94);
-  background: linear-gradient(0deg, rgba(16,0,94,1) 0%, rgba(16,0,94,.8) 50%, rgba(16,0,94,.7) 100%);
+  background: $primary;
+  background: linear-gradient(0deg, rgba(9,24,41,.9) 0%, rgba(9,24,41,.8) 50%, rgba(9,24,41,.7) 100%);
   min-height: 51px !important;
 }
 .css-8u39c-MuiTypography-root{
