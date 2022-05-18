@@ -29,11 +29,15 @@ const Index = () => {
     return (
         <MainLayout>
             <Grid container className='tracks_list'>
+                <Card style={{width: 900}}>
+                    <Box p={3}>
                    <Grid container justifyContent='space-between'>
                        <h1>Track list</h1>
-                       <Button variant="outlined" color="info" onClick={() => router.push('/tracks/create')}>Add track</Button>
+                       <Button variant="contained" size="medium" color="warning" onClick={() => router.push('/tracks/create')}>Add track</Button>
                    </Grid>
                    <TrackList tracks={tracks}/>
+                    </Box>
+                </Card>
             </Grid>
         </MainLayout>
     );

@@ -3,11 +3,13 @@
 $dark_primary: #002984;
 $primary: #3f51b5;
 $light_primary: #757de8;
+$dark: rgba(9,24,41,.7);
 
 div#__next {
   margin-top: 80px;
   h1, h2, h3, h4, h5, h6, p, a, span, div{
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 1px;
+    color: #ffffff;
   }
 }

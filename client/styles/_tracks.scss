@@ -1,23 +1,104 @@
-.tracks_list{
+
+.tracks_list {
   justify-content: center;
-  max-width: 900px;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
   width: 100%;
   padding: 0 15px 10px 15px;
-  h1{
-    margin: 0;
+  & > div{
+    background: $dark_primary;
   }
-  .card{
+  h1 {
+    margin: 0;
+    color: #fff;
+  }
+
+  .card {
 
   }
 }
-.track{
+
+.track {
   margin: 20px auto;
   padding: 10px 15px;
   display: flex;
   align-items: center;
-  svg{
+  cursor: pointer;
+  .play svg {
     border-radius: 50%;
     border: 1px solid $primary;
     padding: 3px;
+    fill: $primary;
+  }
+
+  img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .imageIcon {
+    width: 70px;
+    height: 70px;
+    fill: $dark_primary;
+  }
+
+  div.track_description {
+    max-width: 400px;
+    margin: 0 20px;
+
+    .track_title {
+      font-size: 14px;
+    }
+
+    .track_autor {
+      font-size: 12px;
+      color: grey;
+    }
+  }
+
+  .delete {
+    margin-left: auto;
+
+    svg {
+      fill: $primary;
+    }
+  }
+}
+
+.single_track{
+  min-height: calc(100vh - 115px);
+  padding: 15px;
+  background: $dark_primary;
+ .description_track_wrapper {
+   margin: 20px 0;
+  h1{
+    font-size: 30px;
+  }
+  h3{
+    font-size: 25px;
+  }
+  img, svg{
+    max-width: 200px;
+    height: auto;
+    width: 100%;
+    margin: 15px;
+  }
+  svg{
+    fill: lightgrey;
+  }
+  div:nth-last-child(1){
+    margin-left: 20px;
+  }
+ }
+ .MuiFormControl-root{
+   margin-bottom: 15px;
+   background: #fff;
+   border-radius: 5px;
+ }
+  button{
+    margin-left: auto;
+    max-width: 300px;
+    width: 100%;
   }
 }
