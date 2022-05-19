@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from "../../layouts/MainLayout";
-import {Grid, Card, Button, Box} from "@mui/material";
+import {Grid, Button} from "@mui/material";
 import {useRouter} from "next/router";
 import {ITrack} from "../../types/treck";
 import TrackList from "../../components/TrackList";
@@ -12,7 +12,7 @@ const Index = () => {
             "name": "Track The King and the Jester",
             "text": "Test text",
             "listens": 3,
-            "picture": "picture/60168698-391a-43ed-8196-c26eafb7a773.jpg",
+            "picture": "https://klike.net/uploads/posts/2020-03/1585644026_7.jpg",
             "audio": "audio/0278a983-e1a5-4f87-bb7e-420db57b2914.mp3",
             "comments": [],
         },
@@ -20,7 +20,7 @@ const Index = () => {
             "_id": "627d5037514a04d61ba4433c",
             "name": "Track The King and the Jester",
             "text": "Test text",
-            "picture": "image/4cb9ad9a-9c94-4f4d-b982-8c23360d2c75.jpg",
+            "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdjD9r-GHryXy_6RveidOLdz4_MeFrFIIlwA&usqp=CAU",
             "audio": "audio/3f776ce2-91d7-4383-b235-b776f20fd503.mp3",
             "comments": [],
         }
@@ -29,15 +29,11 @@ const Index = () => {
     return (
         <MainLayout>
             <Grid container className='tracks_list'>
-                <Card style={{width: 900}}>
-                    <Box p={3}>
                    <Grid container justifyContent='space-between'>
                        <h1>Track list</h1>
                        <Button variant="contained" size="medium" color="warning" onClick={() => router.push('/tracks/create')}>Add track</Button>
                    </Grid>
                    <TrackList tracks={tracks}/>
-                    </Box>
-                </Card>
             </Grid>
         </MainLayout>
     );

@@ -13,26 +13,36 @@ const TrackItem: FC<TrackItemProps> = ({track, active = false}) => {
     const router = useRouter()
 
     return (
-        <Card className='track' onClick={() => router.push('/tracks/' + track._id)}>
-            <IconButton className='play' onClick={e => e.stopPropagation()}>
+        <Grid item xs={6} md={4} lg={3}>
+            <Card className='track' onClick={() => router.push('/tracks/' + track._id)}>
+                <div className='track_picture_wrapper'>
+                    {
+                        track.picture ?
+                            <div className='track_picture' style={{backgroundImage: `url(${track.picture})`}}></div> :
+                            <Image className='imageIcon'/>
+                    }
+                    <div className="play">
+                        <IconButton onClick={e => e.stopPropagation()}>
+                            {
+                                active ? <Pause color='primary' fontSize="large"/> :
+                                    <PlayArrow color='primary' fontSize="large"/>
+                            }
+                        </IconButton>
+                    </div>
+                </div>
+
+                <Grid container direction='column' className='track_description'>
+                    <div className='track_title'>{track.name}</div>
+                    <div className='track_autor'>{track.artist}</div>
+                </Grid>
                 {
-                    active? <Pause color='primary' fontSize="large" /> : <PlayArrow color='primary' fontSize="large"/>
+                    !active && <div>03:34 / 05:00</div>
                 }
-            </IconButton>
-            {
-                !track.picture ? <img src={track.picture} alt={track._id}/>:<Image className='imageIcon'/>
-            }
-             <Grid container direction='column' className='track_description'>
-                 <div className='track_title'>{track.name}</div>
-                 <div className='track_autor'>{track.artist}</div>
-             </Grid>
-            {
-                active && <div>03:34 / 05:00</div>
-            }
-            <IconButton className='delete' onClick={e => e.stopPropagation()}>
-                <Delete fontSize="large"/>
-            </IconButton>
-        </Card>
+                <IconButton className='delete' onClick={e => e.stopPropagation()}>
+                    <Delete fontSize="large"/>
+                </IconButton>
+            </Card>
+        </Grid>
     );
 };
 

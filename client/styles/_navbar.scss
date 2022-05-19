@@ -1,6 +1,18 @@
+//sidebar
+.css-1f2xuhi-MuiDrawer-docked > div{
+  background: $sidebar_background;
+  span{
+    color: white;
+  }
+  svg{
+    fill: $icon_sidebar;
+  }
+}
+
+//navbar
 .css-ciy9n4-MuiPaper-root-MuiAppBar-root, .css-1t29gy6-MuiToolbar-root{
-  background: $primary;
-  background: linear-gradient(0deg, $dark_primary 0%, $dark_primary 50%, $dark_primary 100%);
+  background: white;
+  color: $lite_grey;
   min-height: 51px !important;
 }
 .css-8u39c-MuiTypography-root{

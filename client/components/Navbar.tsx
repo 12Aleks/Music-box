@@ -22,7 +22,7 @@ import ListItemText from '@mui/material/ListItemText';
 const drawerWidth = 240;
 
 interface AppBarProps extends MuiAppBarProps {
-    open?: boolean;
+    open?:boolean;
 }
 
 const AppBar = styled(MuiAppBar, {
@@ -50,11 +50,10 @@ const menuItems = [
 
 const Navbar = () => {
     const router = useRouter();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const handleDrawerOpen = () => {
         setOpen(!open);
-
     };
 
     return (
