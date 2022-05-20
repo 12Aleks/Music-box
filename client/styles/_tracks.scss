@@ -25,16 +25,24 @@
       width: 100%;
       z-index: 100;
 
+      &:before {
+        opacity: 0;
+      }
+
       &:hover {
         &:before {
-          transition: all 1.5s ease;
+          -webkit-transition: opacity 1s ease-in-out;
+          -moz-transition: opacity 1s ease-in-out;
+          -o-transition: opacity 1s ease-in-out;
+          transition: opacity 1s ease-in-out;
           content: "";
           position: absolute;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(77, 93, 110, .8);
+          background: rgba(77, 93, 110, 1);
+          opacity: .8;
           z-index: 200;
         }
 
@@ -75,6 +83,10 @@
 
     }
 
+    .track_title, .track_autor, .track_time {
+      color: $sidebar_background;
+    }
+
     div.track_description {
       max-width: 400px;
       margin: 0 20px;
@@ -85,15 +97,18 @@
 
       .track_autor {
         font-size: 12px;
-        color: grey;
       }
+    }
+
+    .track_time {
+      font-size: 14px;
     }
 
     .delete {
       margin-left: auto;
 
       svg {
-        fill: $primary;
+        fill: $sidebar_background;
       }
     }
   }
@@ -103,29 +118,32 @@
 .single_track {
   min-height: calc(100vh - 115px);
   padding: 15px;
-  background: $dark_primary;
-
+  h2 {
+    font: 400 22px 'Montserrat', sans-serif;
+  }
   .description_track_wrapper {
     margin: 20px 0;
 
     h1 {
-      font-size: 30px;
+      font: 400 26px 'Montserrat', sans-serif;
+      margin: 0 0 10px 0;
     }
+
 
     h3 {
-      font-size: 25px;
+      font: 300 20px 'Montserrat', sans-serif;
+      margin: 10px 0;
     }
 
-    img, svg {
-      max-width: 200px;
-      height: auto;
+    .track_picture {
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+      height: 350px;
       width: 100%;
-      margin: 15px;
+      max-width: 350px;
     }
 
-    svg {
-      fill: lightgrey;
-    }
 
     div:nth-last-child(1) {
       margin-left: 20px;

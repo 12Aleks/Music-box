@@ -48,13 +48,11 @@ const menuItems = [
     {page: 'Album List', path: '/albums'},
 ];
 
-const Navbar = () => {
+const Navbar = ({open, handleDrawerOpen }) => {
     const router = useRouter();
-    const [open, setOpen] = useState(true);
 
-    const handleDrawerOpen = () => {
-        setOpen(!open);
-    };
+
+
 
     return (
         <Box sx={{display: 'flex'}}>

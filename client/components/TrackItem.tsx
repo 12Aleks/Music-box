@@ -35,12 +35,14 @@ const TrackItem: FC<TrackItemProps> = ({track, active = false}) => {
                     <div className='track_title'>{track.name}</div>
                     <div className='track_autor'>{track.artist}</div>
                 </Grid>
+                <Grid container  alignItems="center">
                 {
-                    !active && <div>03:34 / 05:00</div>
+                    !active && <div className='track_time'>03:34 / 05:00</div>
                 }
                 <IconButton className='delete' onClick={e => e.stopPropagation()}>
-                    <Delete fontSize="large"/>
+                    <Delete fontSize="medium"/>
                 </IconButton>
+                </Grid>
             </Card>
         </Grid>
     );
