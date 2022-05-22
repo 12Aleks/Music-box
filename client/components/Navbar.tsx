@@ -51,9 +51,6 @@ const menuItems = [
 const Navbar = ({open, handleDrawerOpen }) => {
     const router = useRouter();
 
-
-
-
     return (
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>

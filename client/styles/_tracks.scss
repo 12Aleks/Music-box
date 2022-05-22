@@ -166,5 +166,32 @@
 .create_track {
   min-height: calc(100vh - 115px);
   padding: 15px;
-  background: $dark_primary;
+  .css-1lym95h-MuiGrid-root{
+    min-height: calc(70vh - 400px);
+    & > div{
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: $sidebar_background;
+      //label{
+      //  color: $icon_sidebar;
+      //}
+      input[type='text'], .MuiInputBase-root{
+        background: white;
+        border-radius: 5px;
+        border-color: white;
+      }
+      .MuiInputBase-root{
+        margin-bottom: 10px;
+      }
+    }
+  }
+  svg.Mui-active, svg.Mui-completed{
+    color: $orange_dark
+  }
+  span.MuiStepLabel-label{
+    color: $lite_grey
+  }
 }

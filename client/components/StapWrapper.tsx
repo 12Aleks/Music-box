@@ -8,7 +8,8 @@ const staps = [
     'Information about track',
     'Download the cover',
     'Download the track'
-]
+];
+
 const StapWrapper: FC<StepWrapperProps> = ({activeStep, children}) => {
     return (
             <Container>

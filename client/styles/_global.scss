@@ -4,16 +4,13 @@ $lite_grey: rgb(56, 59, 63);
 $sidebar_background: rgb(77,93,110);
 $dark_grey: rgb(13, 20, 27);
 $icon_sidebar: rgb(76,182,203);
+$orange: #ffa726;
+$orange_dark: #f57c00;
 
 
-$dark_primary: #002984;
-$primary: #3f51b5;
-$light_primary: #757de8;
-$dark: rgba(9,24,41,.7);
-$color: #0d2434;
 
 div#__next {
-  margin-top: 80px;
+  margin-top: 55px;
   h1, h2, h3, h4, h5, h6, p, a, span, div{
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 1px;
