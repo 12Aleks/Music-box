@@ -1,0 +1,61 @@
+.create_track {
+  min-height: calc(100vh - 115px);
+  padding: 15px;
+
+  .css-1lym95h-MuiGrid-root {
+    min-height: calc(70vh - 400px);
+
+    & > div {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: $sidebar_background;
+      position: relative;
+      h1 {
+        color: white;
+        display: block;
+        margin: 0 auto 30px;
+        font: 400 26px 'Montserrat', sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        input[type='text'], .MuiInputBase-root {
+          background: white;
+          border-radius: 5px;
+          border-color: white;
+        }
+      }
+
+      button{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+      }
+
+
+
+
+      .MuiInputBase-root {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  svg.Mui-active, svg.Mui-completed {
+    color: $orange_dark
+  }
+
+  span.MuiStepLabel-label {
+    color: $lite_grey
+  }
+}
+

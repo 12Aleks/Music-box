@@ -4,32 +4,61 @@ import StapWrapper from "../../components/StapWrapper";
 import {Grid, Button} from "@mui/material";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import DataUpload from "../../components/DataUpload";
-import FileUpload from "../../components/FileUpload";
+import DataUpload from "../../components/upload/DataUpload";
+import FileUpload from "../../components/upload/FileUpload";
+import SaveIcon from '@mui/icons-material/Save'
 
 const Create = () => {
     const [activeStep, setActiveStep] = useState<number>(0);
+    const [loading, setLoading] = React.useState<boolean>(true);
 
     const next = () => {
         if (activeStep !== 2) setActiveStep(prev => prev + 1)
     };
 
     const back = () => {
-       setActiveStep(prev => prev - 1)
+        setActiveStep(prev => prev - 1)
     };
 
     return (
         <MainLayout>
-            <div className="create_track">
-                <StapWrapper activeStep={activeStep}>
+            <div className="create_track">'
+                <StapWrapper activeStep={activeStep} >
                     {
-                        activeStep  === 1 ? <FileUpload file={''} setFile={() => ({})}/> : activeStep === 2 ? <h1>Stap 3</h1> : <DataUpload/>
+                        activeStep === 1 ? <FileUpload
+                                setFile={() => ({})}
+                                accept='image/*'>
+                                <h1>Second step</h1>
+                                <Button
+                                    variant="contained"
+                                    size="large"
+                                    color="warning"
+                                    onClick={() => setLoading(!loading)}
+                                    endIcon={<SaveIcon />}
+                                >
+                                    Upload song cover picture
+                                </Button>
+                            </FileUpload> :
+                            activeStep === 2 ? <FileUpload
+                                setFile={() => ({})}
+                                accept='image/*'>
+                                <h1>Third step</h1>
+                                <Button
+                                    variant="contained"
+                                    size="large"
+                                    color="warning"
+                                    onClick={() => setLoading(!loading)}
+                                    endIcon={<SaveIcon />}
+                                >
+                                    Upload an audio track
+                                </Button>
+                            </FileUpload> : <DataUpload/>
                     }
                 </StapWrapper>
                 <Grid container justifyContent='space-between'>
-                    <Button variant="contained" size="medium" color="warning" disabled={activeStep === 0} onClick={back}
+                    <Button variant="contained" size="large" color="warning" disabled={activeStep === 0} onClick={back}
                             startIcon={<ArrowBackIosIcon/>}>Back</Button>
-                    <Button variant="contained" size="medium" color="warning" onClick={next}
+                    <Button variant="contained" size="large" color="warning" onClick={next}
                             endIcon={<ArrowForwardIosIcon/>}>Next</Button>
                 </Grid>
             </div>
