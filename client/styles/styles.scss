@@ -2,15 +2,50 @@
 @import "navbar";
 @import "tracks";
 @import "uplod";
-body{
+@import "player";
+
+body {
   background: #f6f6f6;
-  .center{
+
+  .center {
     margin-top: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
+
+  .albums_list, .tracks_list {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 15px 10px 15px;
+
+    h1 {
+      margin: 0;
+      color: $lite_grey;
+      letter-spacing: 1px;
+    }
+    button{
+      letter-spacing: 1px;
+    }
+  }
+  .tracks_list, .player{
+    div.track_description {
+      max-width: 400px;
+      margin: 0 20px;
+
+      .track_title {
+        font-size: 14px;
+      }
+
+      .track_autor {
+        font-size: 12px;
+      }
+    }
+  }
 }
+
 
 

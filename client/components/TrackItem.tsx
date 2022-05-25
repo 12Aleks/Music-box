@@ -10,7 +10,7 @@ interface TrackItemProps {
 }
 
 const TrackItem: FC<TrackItemProps> = ({track, active = false}) => {
-    const router = useRouter()
+    const router = useRouter();
 
     return (
         <Grid item xs={6} md={4} lg={3}>

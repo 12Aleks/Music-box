@@ -10,7 +10,9 @@ import SaveIcon from '@mui/icons-material/Save'
 
 const Create = () => {
     const [activeStep, setActiveStep] = useState<number>(0);
-    const [loading, setLoading] = React.useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [picture, setPicture] = useState(null)
+    const [audio, setAudio] = useState(null)
 
     const next = () => {
         if (activeStep !== 2) setActiveStep(prev => prev + 1)
@@ -26,7 +28,7 @@ const Create = () => {
                 <StapWrapper activeStep={activeStep} >
                     {
                         activeStep === 1 ? <FileUpload
-                                setFile={() => ({})}
+                                setFile={setPicture}
                                 accept='image/*'>
                                 <h1>Second step</h1>
                                 <Button
@@ -40,8 +42,8 @@ const Create = () => {
                                 </Button>
                             </FileUpload> :
                             activeStep === 2 ? <FileUpload
-                                setFile={() => ({})}
-                                accept='image/*'>
+                                setFile={setAudio}
+                                accept='audio/*'>
                                 <h1>Third step</h1>
                                 <Button
                                     variant="contained"

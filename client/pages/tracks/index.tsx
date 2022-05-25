@@ -32,7 +32,7 @@ const Index = () => {
         <MainLayout>
             <Grid container className='tracks_list'>
                    <Grid container justifyContent='space-between'>
-                       <h1>Track list</h1>
+                       <h1>Tracks list</h1>
                        <Button variant="contained" size="medium" color="warning" onClick={() => router.push('/tracks/create')}>Add track</Button>
                    </Grid>
                    <TrackList tracks={tracks}/>

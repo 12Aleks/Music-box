@@ -2,6 +2,7 @@ import React, {FC, useState} from 'react';
 import Navbar from "../components/Navbar";
 import Container from '@mui/material/Container';
 import {styled} from "@mui/material";
+import Player from "../components/Player";
 
 interface Layout {
     children: any;
@@ -29,6 +30,7 @@ const MainLayout: FC<Layout> = ({children}) => {
         }),
     }));
 
+
     return (
 
 
@@ -38,7 +40,9 @@ const MainLayout: FC<Layout> = ({children}) => {
                 <Container>
                 {children}
                 </Container>
+
             </Main>
+            <Player open={open}/>
         </>
     );
 };
