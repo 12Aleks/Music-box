@@ -3,6 +3,7 @@ import {ITrack} from "../types/treck";
 import {Card, Grid, IconButton} from "@mui/material";
 import {Pause, PlayArrow, Delete, Image} from "@mui/icons-material";
 import {useRouter} from "next/router";
+import {useActions} from "../hooks/useActions";
 
 interface TrackItemProps {
     track: ITrack,
@@ -11,6 +12,13 @@ interface TrackItemProps {
 
 const TrackItem: FC<TrackItemProps> = ({track, active = false}) => {
     const router = useRouter();
+    const {playTrack, pauseTrack, setActiveTrack} = useActions();
+
+    const play = (e) => {
+      e.stopPropagation();
+      setActiveTrack(track);
+      playTrack();
+    };
 
     return (
         <Grid item xs={6} md={4} lg={3}>
@@ -22,7 +30,7 @@ const TrackItem: FC<TrackItemProps> = ({track, active = false}) => {
                             <Image className='imageIcon'/>
                     }
                     <div className="play">
-                        <IconButton onClick={e => e.stopPropagation()}>
+                        <IconButton onClick={play}>
                             {
                                 active ? <Pause color='primary' fontSize="large"/> :
                                     <PlayArrow color='primary' fontSize="large"/>

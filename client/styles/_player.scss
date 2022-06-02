@@ -25,6 +25,12 @@
   }
   .track_progress{
     display: flex;
-
+    div{
+      width: 100px;
+      margin: 0 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }

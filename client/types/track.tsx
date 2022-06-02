@@ -1,4 +1,4 @@
-export interface IComment{
+export interface IComment {
     _id: string;
     username: string;
     text: string
@@ -10,7 +10,7 @@ export interface ITrack {
     artist: string;
     text: string;
     listens: number;
-    audio: string;
     picture: string;
+    audio: string;
     comments: IComment[]
 }

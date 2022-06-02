@@ -4,9 +4,13 @@ import {Grid, Button} from "@mui/material";
 import {useRouter} from "next/router";
 import {ITrack} from "../../types/treck";
 import TrackList from "../../components/TrackList";
+import {useTypedSelector} from "../../hooks/useTypesSelector";
+import {useActions} from "../../hooks/useActions";
 
 const Index = () => {
     const router = useRouter();
+
+
     const tracks: ITrack[] = [
         { "_id": "627d10b9c0fa2d18f96b3330",
             "name": "Track The King and the Jester",
