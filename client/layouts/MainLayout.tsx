@@ -20,7 +20,7 @@ const MainLayout: FC<Layout> = ({children}) => {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        marginLeft: `-${240}px`,
+        marginLeft: `-${0}px`,
         ...(open && {
             transition: theme.transitions.create('margin', {
                 easing: theme.transitions.easing.easeOut,
@@ -36,8 +36,8 @@ const MainLayout: FC<Layout> = ({children}) => {
 
         <>
             <Navbar open={open} handleDrawerOpen={() => setOpen(!open)}/>
-            <Main open={open}>
-                <Container>
+            <Main open={open} className={open && open ? 'open' : '' }>
+                <Container >
                 {children}
                 </Container>
 

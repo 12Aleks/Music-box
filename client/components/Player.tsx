@@ -1,9 +1,10 @@
 import React, {FC, useEffect} from 'react';
 import {Grid, IconButton} from "@mui/material";
 import {Pause, PlayArrow, VolumeUp} from "@mui/icons-material";
-import TrackProgres from "./TrackProgres";
+import TrackProgress from "./TrackProgress";
 import {useTypedSelector} from "../hooks/useTypesSelector";
 import {useActions} from "../hooks/useActions";
+import {SITE_NAME} from "../utils";
 
 
 interface IPlayerProps {
@@ -24,7 +25,7 @@ const Player: FC<IPlayerProps> = ({open = false}) => {
     const setAudio = () => {
         if(active){
             //ukazatel na to czto nuzno proigrywat
-            audio.src = active.audio;
+            audio.src = `${SITE_NAME}${active.audio}`;
             //izmenenie zwuka
             audio.volume = volume / 100;
             //track long time
@@ -77,9 +78,9 @@ const Player: FC<IPlayerProps> = ({open = false}) => {
                     <div className='track_title'>{active?.name}</div>
                     <div className='track_autor'>{active?.artist}</div>
                 </Grid>
-                <TrackProgres left={currentTime} right={duration} onChange={changeCurrentTime} type={true}/>
+                <TrackProgress left={currentTime} right={duration} onChange={changeCurrentTime} type={true}/>
                 <VolumeUp style={{marginLeft: 'auto'}}/>
-                <TrackProgres left={volume} right={100} onChange={changeVolume} />
+                <TrackProgress left={volume} right={100} onChange={changeVolume} />
             </div>
 
     );
