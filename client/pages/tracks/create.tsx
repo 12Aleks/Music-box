@@ -8,14 +8,23 @@ import DataUpload from "../../components/upload/DataUpload";
 import FileUpload from "../../components/upload/FileUpload";
 import SaveIcon from '@mui/icons-material/Save'
 
+
 const Create = () => {
     const [activeStep, setActiveStep] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
     const [picture, setPicture] = useState(null)
     const [audio, setAudio] = useState(null)
 
+
+
     const next = () => {
-        if (activeStep !== 2) setActiveStep(prev => prev + 1)
+        if (activeStep !== 2) {
+            setActiveStep(prev => prev + 1);
+        }
+        else {
+            const formData = new FormData();
+            formData.append('name', '')
+        }
     };
 
     const back = () => {

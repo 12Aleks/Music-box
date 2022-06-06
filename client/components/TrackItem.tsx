@@ -1,10 +1,11 @@
 import React, {FC} from 'react';
 import {ITrack} from "../types/track";
 import {Card, Grid, IconButton} from "@mui/material";
-import {Pause, PlayArrow, Delete, Image} from "@mui/icons-material";
+import {Pause, PlayArrow, Delete} from "@mui/icons-material";
 import {useRouter} from "next/router";
 import {useActions} from "../hooks/useActions";
 import {SITE_NAME} from "../utils";
+import notfound from "../assets/not-found.png";
 
 interface TrackItemProps {
     track: ITrack,
@@ -26,9 +27,9 @@ const TrackItem: FC<TrackItemProps> = ({track, active = false}) => {
             <Card className='track' onClick={() => router.push('/tracks/' + track._id)}>
                 <div className='track_picture_wrapper'>
                     {
-                        track.picture ?
-                            <div className='track_picture' style={{backgroundImage: `${SITE_NAME}${track.picture})`}}></div> :
-                            <Image className='imageIcon'/>
+                        track.picture && track.picture ?
+                            <div className='track_picture' style={{backgroundImage: `url(${SITE_NAME}${track.picture})`}}></div> :
+                            <div className='track_picture' style={{backgroundImage:  `url(${notfound})`}}></div>
                     }
                     <div className="play">
                         <IconButton onClick={play}>
