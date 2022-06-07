@@ -1,9 +1,9 @@
 import React, {FC, useRef} from 'react';
 
 interface IFileUpload {
-    setFile: Function;
-    accept: string
-
+    setFile: Function,
+    accept: string,
+    children?: React.ReactNode
 }
 
 const FileUpload: FC<IFileUpload> = ({setFile, accept, children}) => {
@@ -18,9 +18,9 @@ const FileUpload: FC<IFileUpload> = ({setFile, accept, children}) => {
             <input
                 type="file"
                 accept={accept}
-                style={{display: 'none'}}
-                onChange={onChange}
+                style={{display: "none"}}
                 ref={ref}
+                onChange={onChange}
             />
             {children}
         </div>

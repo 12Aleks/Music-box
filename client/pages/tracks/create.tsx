@@ -1,29 +1,40 @@
 import React, {useState} from 'react';
 import MainLayout from "../../layouts/MainLayout";
-import StapWrapper from "../../components/StapWrapper";
-import {Grid, Button} from "@mui/material";
+import StepWrapper from "../../components/StepWrapper";
+import {Grid, Button, TextField} from "@mui/material";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import DataUpload from "../../components/upload/DataUpload";
 import FileUpload from "../../components/upload/FileUpload";
 import SaveIcon from '@mui/icons-material/Save'
+import {useInput} from "../../hooks/useInput";
+import axios from "axios";
+import {useRouter} from "next/router";
 
 
 const Create = () => {
     const [activeStep, setActiveStep] = useState<number>(0);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [picture, setPicture] = useState(null)
-    const [audio, setAudio] = useState(null)
+    const [picture, setPicture] = useState(null);
+    const [audio, setAudio] = useState(null);
+    const name = useInput('');
+    const artist = useInput('');
+    const text = useInput('');
+    const router = useRouter();
 
 
-
-    const next = () => {
+    const next = async () => {
         if (activeStep !== 2) {
             setActiveStep(prev => prev + 1);
-        }
-        else {
-            const formData = new FormData();
-            formData.append('name', '')
+        } else {
+            let formData = new FormData();
+            formData.append('name', name.value);
+            formData.append('text', text.value);
+            formData.append('artist', artist.value);
+            formData.append('picture', picture);
+            formData.append('audio', audio);
+
+           await axios.post('http://localhost:5000/tracks', formData)
+                .then(resp => router.push('/tracks'))
+                .catch(e => console.log(e))
         }
     };
 
@@ -33,39 +44,60 @@ const Create = () => {
 
     return (
         <MainLayout>
-            <div className="create_track">'
-                <StapWrapper activeStep={activeStep} >
-                    {
-                        activeStep === 1 ? <FileUpload
-                                setFile={setPicture}
-                                accept='image/*'>
-                                <h1>Second step</h1>
-                                <Button
-                                    variant="contained"
-                                    size="large"
-                                    color="warning"
-                                    onClick={() => setLoading(!loading)}
-                                    endIcon={<SaveIcon />}
-                                >
-                                    Upload song cover picture
-                                </Button>
-                            </FileUpload> :
-                            activeStep === 2 ? <FileUpload
-                                setFile={setAudio}
-                                accept='audio/*'>
-                                <h1>Third step</h1>
-                                <Button
-                                    variant="contained"
-                                    size="large"
-                                    color="warning"
-                                    onClick={() => setLoading(!loading)}
-                                    endIcon={<SaveIcon />}
-                                >
-                                    Upload an audio track
-                                </Button>
-                            </FileUpload> : <DataUpload/>
+            <div className="create_track">
+                <StepWrapper activeStep={activeStep}>
+                    {activeStep === 0 && <Grid container>
+                        <h1>First step</h1>
+                        <div className='form'>
+                            <TextField
+                                {...name}
+                                label={'Track title'}
+                            />
+                            <TextField
+                                {...artist}
+                                 label={'Track author'}
+                            />
+                            <TextField
+                                {...text}
+                                label={'Track text'}
+                                multiline
+                                rows={3}
+                            />
+                        </div>
+                    </Grid>
                     }
-                </StapWrapper>
+                    {
+                      activeStep === 1 && <FileUpload setFile={setPicture} accept="image/*">
+                            <h1>Second step</h1>
+                            <Button
+                                variant="contained"
+                                size="large"
+                                color="warning"
+                                // onClick={() => setLoading(!loading)}
+                                endIcon={<SaveIcon/>}
+                            >
+                                Upload song cover picture
+                            </Button>
+                        </FileUpload>
+                    }
+
+                    {
+                        activeStep === 2 && <FileUpload setFile={setAudio} accept="audio/*">
+                            <h1>Third step</h1>
+                            <Button
+                                variant="contained"
+                                size="large"
+                                color="warning"
+                                // onClick={() => setLoading(!loading)}
+                                endIcon={<SaveIcon/>}
+                            >
+                                Upload an audio track
+                            </Button>
+                        </FileUpload>
+                    }
+
+
+                </StepWrapper>
                 <Grid container justifyContent='space-between'>
                     <Button variant="contained" size="large" color="warning" disabled={activeStep === 0} onClick={back}
                             startIcon={<ArrowBackIosIcon/>}>Back</Button>

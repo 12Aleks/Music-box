@@ -5,7 +5,7 @@ import {styled} from "@mui/material";
 import Player from "../components/Player";
 
 interface Layout {
-    children: any;
+    children?: React.ReactNode;
 }
 
 const MainLayout: FC<Layout> = ({children}) => {
@@ -32,8 +32,6 @@ const MainLayout: FC<Layout> = ({children}) => {
 
 
     return (
-
-
         <>
             <Navbar open={open} handleDrawerOpen={() => setOpen(!open)}/>
             <Main open={open} className={open && open ? 'open' : '' }>

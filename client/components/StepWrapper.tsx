@@ -3,18 +3,20 @@ import {Container, Stepper, StepLabel, Step, Grid, Card} from "@mui/material";
 
 interface StepWrapperProps {
   activeStep: number
+  children?: React.ReactNode
 }
-const staps = [
+const steps = [
     'Information about track',
     'Download the cover',
     'Download the track'
 ];
 
-const StapWrapper: FC<StepWrapperProps> = ({activeStep, children}) => {
+
+const StepWrapper: FC<StepWrapperProps> = ({activeStep, children}) => {
     return (
             <Container>
                 <Stepper activeStep={activeStep}>
-                    {staps.map((step, index) =>
+                    {steps.map((step, index) =>
                       <Step key={index} completed={activeStep > index}>
                           <StepLabel>{step}</StepLabel>
                       </Step>
@@ -29,4 +31,4 @@ const StapWrapper: FC<StepWrapperProps> = ({activeStep, children}) => {
     );
 };
 
-export default StapWrapper;
+export default StepWrapper;
