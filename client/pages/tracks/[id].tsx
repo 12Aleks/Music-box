@@ -1,23 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
 import MainLayout from "../../layouts/MainLayout";
-import {ITrack} from "../../types/treck";
 import {Button, Grid, TextField} from "@mui/material";
 import {useRouter} from "next/router";
 import {Image} from "@mui/icons-material";
+import {GetServerSideProps} from "next";
+import axios from "axios";
+import {SITE_NAME} from "../../utils";
+import {useInput} from "../../hooks/useInput";
+import {ITrack} from "../../types/track";
 
 
-const TrackPage = () => {
+const TrackPage = ({serverTrack}) => {
+    const [track, setTrack] = useState<ITrack>(serverTrack);
     const router = useRouter();
-    const track: ITrack =
-        {
-            "_id": "627d5037514a04d61ba4433c",
-            "name": "Track The King and the Jester",
-            "artist": "The King and the Jester",
-            "text": "Test text",
-            "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdjD9r-GHryXy_6RveidOLdz4_MeFrFIIlwA&usqp=CAU",
-            "audio": "audio/3f776ce2-91d7-4383-b235-b776f20fd503.mp3",
-            "comments": [],
-        };
+    const username = useInput('');
+     const text = useInput('');
+
+    const addComment = async() => {
+        try{
+            const response = await axios.post(`${SITE_NAME}tracks/comment`, {
+                username: text.value,
+                text: text.value,
+                trackId: track._id
+            })
+
+            setTrack({...track, comments: [...track.coments, response.data ]})
+        }catch(e){
+          console.log(e)
+        }
+    }
 
     return (
         <MainLayout>
@@ -26,7 +37,7 @@ const TrackPage = () => {
                     Return to list
                 </Button>
                 <Grid container className='description_track_wrapper'>
-                    {track.picture ?  <div className='track_picture' style={{backgroundImage: `url(${track.picture})`}}></div> : <Image color='primary'/>}
+                    {track.picture ?  <div className='track_picture' style={{backgroundImage: `url(${SITE_NAME}${track.picture})`}}></div> : <Image color='primary'/>}
                     <div>
                         <h1>Track title: {track.name}</h1>
                         <h3>Track author: {track.artist}</h3>
@@ -37,9 +48,14 @@ const TrackPage = () => {
                 <p>{track.text}</p>
                 <h2>Comments:</h2>
                 <Grid container>
-                    <TextField label='Your name' fullWidth/>
-                    <TextField label='Your comment' fullWidth multiline rows={4} mt={3} />
-                    <Button variant="contained" size="medium" color="warning" >Send</Button>
+                    <TextField {...username} label='Your name' fullWidth/>
+                    <TextField {...text} label='Your comment' fullWidth multiline rows={4} style={{marginTop: '15px'}} />
+                    <Button
+                        variant="contained"
+                        size="medium"
+                        color="warning"
+                        onClick={addComment}
+                    >Send</Button>
                 </Grid>
                 <div>
                     {
@@ -58,3 +74,12 @@ const TrackPage = () => {
 
 
 export default TrackPage;
+
+export const getServerSideProps: GetServerSideProps = async ({params}) => {
+    const response = await axios.get('http://localhost:5000/tracks/' + params.id);
+    return {
+        props: {
+            serverTrack: response.data
+        }
+    }
+}

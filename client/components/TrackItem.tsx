@@ -29,7 +29,7 @@ const TrackItem: FC<TrackItemProps> = ({track, active = false}) => {
                     {
                         track.picture && track.picture ?
                             <div className='track_picture' style={{backgroundImage: `url(${SITE_NAME}${track.picture})`}}></div> :
-                            <div className='track_picture' style={{backgroundImage:  `url(${notfound})`}}></div>
+                            <div className='track_picture' style={{backgroundImage:  `url(${notfound.src})`}}></div>
                     }
                     <div className="play">
                         <IconButton onClick={play}>

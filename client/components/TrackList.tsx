@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {ITrack} from "../types/treck";
+import {ITrack} from "../types/track";
 import {Grid} from "@mui/material";
 import TrackItem from "./TrackItem";
 
