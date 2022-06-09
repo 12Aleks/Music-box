@@ -14,21 +14,21 @@ const TrackPage = ({serverTrack}) => {
     const [track, setTrack] = useState<ITrack>(serverTrack);
     const router = useRouter();
     const username = useInput('');
-     const text = useInput('');
+    const text = useInput('');
 
     const addComment = async() => {
         try{
             const response = await axios.post(`${SITE_NAME}tracks/comment`, {
-                username: text.value,
+                username: username.value,
                 text: text.value,
                 trackId: track._id
             })
 
-            setTrack({...track, comments: [...track.coments, response.data ]})
+            setTrack({...track, comments: [...track.comments, response.data ]});
         }catch(e){
           console.log(e)
         }
-    }
+    };
 
     return (
         <MainLayout>
@@ -49,7 +49,7 @@ const TrackPage = ({serverTrack}) => {
                 <h2>Comments:</h2>
                 <Grid container>
                     <TextField {...username} label='Your name' fullWidth/>
-                    <TextField {...text} label='Your comment' fullWidth multiline rows={4} style={{marginTop: '15px'}} />
+                    <TextField {...text}  label='Your comment' fullWidth multiline rows={4} style={{marginTop: '15px'}} />
                     <Button
                         variant="contained"
                         size="medium"
@@ -60,7 +60,7 @@ const TrackPage = ({serverTrack}) => {
                 <div>
                     {
                         track.comments.map(comment =>
-                          <div>
+                          <div className='comment '>
                              <h3>Author: {comment.username}</h3>
                              <div>Comment: {comment.text}</div>
                           </div>

@@ -1,0 +1,25 @@
+.comment{
+  &:nth-child(1){
+    margin-top: 40px;
+  }
+  padding: 10px 20px;
+  margin: 15px 0;
+  background-color: #eeeeee;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #777777;
+  overflow: hidden;
+  h3 {
+    display: inline-block;
+    text-decoration: underline;
+    color: #000000;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font: 600 16px/16px 'Montserrat', sans-serif;
+  }
+  p {
+    margin: -15px 0 0 46px;
+    color: #555555;
+    text-align: justify;
+    font: 400 16px/16px 'Montserrat', sans-serif;
+  }
+}

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {ITrack} from "../types/track";
 import {Card, Grid, IconButton} from "@mui/material";
 import {Pause, PlayArrow, Delete} from "@mui/icons-material";
@@ -9,17 +9,26 @@ import notfound from "../assets/not-found.png";
 
 interface TrackItemProps {
     track: ITrack,
-    active?: boolean
+
 }
 
-const TrackItem: FC<TrackItemProps> = ({track, active = false}) => {
+const TrackItem: FC<TrackItemProps> = ({track}) => {
     const router = useRouter();
-    const {playTrack, setActiveTrack} = useActions();
+    const [active, setActive] = useState<boolean>(true);
+    const {playTrack, pauseTrack, setActiveTrack} = useActions();
 
     const play = (e) => {
-      e.stopPropagation();
-      setActiveTrack(track);
-      playTrack();
+        e.stopPropagation();
+      if(active)  {
+          setActiveTrack(track);
+          playTrack();
+          setActive(true)
+      }else{
+          pauseTrack()
+          setActive(false)
+      }
+
+
     };
 
     return (
@@ -34,7 +43,7 @@ const TrackItem: FC<TrackItemProps> = ({track, active = false}) => {
                     <div className="play">
                         <IconButton onClick={play}>
                             {
-                                active ?  <PlayArrow color='primary' fontSize="large"/> :
+                                !active ? <PlayArrow color='primary' fontSize="large"/> :
                                     <Pause color='primary' fontSize="large"/>
                             }
                         </IconButton>

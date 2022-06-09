@@ -16,9 +16,11 @@ export class TrackController{
         { name: 'audio', maxCount: 1 },
     ]))
     create(@UploadedFiles() files, @Body() dto: CreateTrackDto){
+        console.log('controller', dto, files )
         const {picture, audio} = files;
         return this.tracksService.create(dto, picture[0], audio[0] )
     }
+
     @Get()
     getAll(@Query('count') count: number, @Query('offset') offset: number){
       return this.tracksService.getAll(count, offset)

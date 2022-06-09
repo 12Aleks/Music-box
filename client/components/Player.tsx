@@ -18,8 +18,13 @@ const Player: FC<IPlayerProps> = ({open = false}) => {
     const {pauseTrack, playTrack, setVolume, setCurrentTime, setDuration} = useActions();
 
     useEffect(() => {
-        if(!audio) audio = new Audio();
-        else setAudio(); play();
+        if(!audio) {
+            audio = new Audio();
+        }
+        else {
+            setAudio();
+            play();
+        }
     }, [active]);
 
     const setAudio = () => {
@@ -41,9 +46,15 @@ const Player: FC<IPlayerProps> = ({open = false}) => {
 
 
     const play = () => {
-        if (pause) {
+        let resp = audio.play();
+        if (pause && resp !== undefined) {
             playTrack();
-            audio.play()
+            resp.then(_ => {
+                audio.play()
+            }).catch(error => {
+                console.log(error)
+            });
+
         } else {
             pauseTrack();
             audio.pause()
