@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import MainLayout from "../../layouts/MainLayout";
 import StepWrapper from "../../components/StepWrapper";
 import {Grid, Button, TextField} from "@mui/material";
@@ -13,6 +13,7 @@ import {useRouter} from "next/router";
 
 const Create = () => {
     const [activeStep, setActiveStep] = useState<number>(0);
+    const [activeButton, setActiveButton] = useState<boolean>(true);
     const [picture, setPicture] = useState(null);
     const [audio, setAudio] = useState(null);
     const name = useInput('');
@@ -21,9 +22,27 @@ const Create = () => {
     const router = useRouter();
 
 
+    useEffect(() => {
+             if(name.value.length >= 2 && artist.value.length >= 2 && text.value.length  >= 10 ) setActiveButton(false);
+             else setActiveButton(true)
+    }, [name, artist, text]);
+
+
+    console.log(picture)
+
+    useEffect(() => {
+        picture && picture.name ? setActiveButton(false) :setActiveButton(true);
+        }, [picture]);
+
+    useEffect(() => {
+        audio && audio.name ? setActiveButton(false) :setActiveButton(true);
+    }, [audio]);
+
+
     const next = async () => {
         if (activeStep !== 2) {
             setActiveStep(prev => prev + 1);
+            setActiveButton(true);
         } else {
             let formData = new FormData();
             formData.append('name', name.value);
@@ -102,7 +121,7 @@ const Create = () => {
                     <Button variant="contained" size="large" color="warning" disabled={activeStep === 0} onClick={back}
                             startIcon={<ArrowBackIosIcon/>}>Back</Button>
                     <Button variant="contained" size="large" color="warning" onClick={next}
-                            endIcon={<ArrowForwardIosIcon/>}>Next</Button>
+                            endIcon={<ArrowForwardIosIcon/>} disabled={activeButton}>Next</Button>
                 </Grid>
             </div>
         </MainLayout>
